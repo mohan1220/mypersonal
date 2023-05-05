@@ -1,0 +1,18 @@
+import requests
+
+def get_metadata(key):
+    """
+    Retrieve a particular data key from the EC2 instance metadata
+    """
+    response = requests.get("http://169.254.169.254/latest/meta-data/{}".format(key))
+    return response.text
+
+# Example usage
+instance_id = get_metadata("instance-id")
+instance_type = get_metadata("instance-type")
+availability_zone = get_metadata("placement/availability-zone")
+
+# Print the metadata values
+print("Instance ID: {}".format(instance_id))
+print("Instance Type: {}".format(instance_type))
+print("Availability Zone: {}".format(availability_zone))
